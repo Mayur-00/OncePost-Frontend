@@ -1,13 +1,13 @@
 import { GoogleProvider } from "@/providers/GoogleProvider";
 
-export default async function DashboardLayout({
+export default async function authLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <body>
+   
       <GoogleProvider>{children}</GoogleProvider>
-    </body>
+   
   );
 }

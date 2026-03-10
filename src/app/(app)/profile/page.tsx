@@ -13,7 +13,7 @@ import {
 import React, { useEffect } from "react";
 
 const page = () => {
-  const { user, connectedAccounts, getUser } = useUserStore();
+  const { user, connectedAccounts, getUser, subscriptions } = useUserStore();
 
   useEffect(() => {
     if (!user) {
@@ -111,18 +111,7 @@ const page = () => {
 
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3 text-sm text-zinc-600">
-            <FileText size={16} />
-            <span>Posted on LinkedIn • 2 hours ago</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-sm text-zinc-600">
-            <FileText size={16} />
-            <span>Scheduled a post • Yesterday</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-sm text-zinc-600">
-            <FileText size={16} />
-            <span>Posted on X • 3 days ago</span>
+           <h1>Plan</h1>
           </div>
         </div>
       </section>

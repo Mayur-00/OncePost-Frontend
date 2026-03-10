@@ -1,10 +1,34 @@
-
+'use client'
 import AnalyticsSection from "@/components/dashboard/AnalyticsSection";
 import HeaderSection from "@/components/dashboard/HeaderSection";
 import MiniFooter from "@/components/dashboard/MiniFooter";
 import QuickActions from "@/components/dashboard/QuickActions";
 import RecentsSection from "@/components/dashboard/RecentsSection";
+import { useUserStore } from "@/stores/user.store";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 export default function HomePage() {
+
+  const user = useUserStore((state) => state.user);
+  const getUser = useUserStore((state) => state.getUser);
+  const router = useRouter();
+
+  useEffect(() => {
+      if (!user) {
+        getUser();
+      }
+    }, [user, getUser]);
+  
+    // 2️⃣ Redirect if not onboarded
+    useEffect(() => {
+      if (user && !user.isOnboarded) {
+        console.log('user is not onboarded');
+        router.replace('/onboarding');
+      }
+    }, [user, router]);
+
+
 
   return (
     <>

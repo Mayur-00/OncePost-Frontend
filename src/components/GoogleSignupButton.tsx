@@ -1,51 +1,43 @@
+"use client"
 
 import { useAuthStore } from "@/stores/auth.store";
-
-import {
-  CredentialResponse,
-  GoogleLogin,
-  GoogleOAuthProvider,
-} from "@react-oauth/google";
-import axios from "axios";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { toast } from "sonner";
 
 const GoogleSignupButton = () => {
-  const router = useRouter();
+  const { googleAuthSuccess } = useAuthStore();
 
-
-  const {googleAuthSuccess} = useAuthStore();
+  const router = useRouter()
 
   const onSuccess = async (credentialResponse: CredentialResponse) => {
-    if(!credentialResponse.credential){
-      toast.error('failed');
-      return
+    if (!credentialResponse.credential) {
+      toast.error("failed");
+      return;
     }
     const res = await googleAuthSuccess(credentialResponse.credential);
 
-    if(!res.success){
+    if (!res.success) {
       toast.error(res.message);
-      return
-    };
-    window.location.href = '/dashboard'
+      return;
+    }
+    router.replace("/onboarding")
   };
 
   const handleError = () => {
-   toast.error('sign in process Failed, Please retry after some time')
+    toast.error("sign in process Failed, Please retry after some time");
   };
 
   return (
-   
-      <GoogleLogin
-        onSuccess={onSuccess}
-        onError={handleError}
-        useOneTap
-        theme="outline"
-        size="large"
-        text="continue_with"
-        shape="pill"
-      />
+    <GoogleLogin
+      onSuccess={onSuccess}
+      onError={handleError}
+      useOneTap
+      theme="outline"
+      size="large"
+      text="continue_with"
+      shape="pill"
+    />
   );
 };
 

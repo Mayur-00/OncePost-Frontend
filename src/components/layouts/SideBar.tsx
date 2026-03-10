@@ -2,11 +2,11 @@
 import SidebarNavigationButtonsSection from "../sidebar/SidebarNavigationButtonsSection";
 import UserProfileBar from "../sidebar/UserProfileBar";
 
-const SideBar = async () => {
+const SideBar =  () => {
   console.log('sidebar 1')
   return (
     <section
-      className={` bg-gray-50 w-[20%] lg:w-[20%]   h-screen px-4 py-2 hidden lg:flex flex-col items-center outline outline-zinc-300 text-2xl font-semibold text-zinc-700 rounded-lg transition delay-500 duration-300 ease-in   `}
+      className={` bg-gray-50 w-[20%] lg:w-[20%] h-screen px-4 py-2 hidden lg:flex flex-col items-center outline outline-zinc-300 text-2xl font-semibold text-zinc-700 rounded-lg transition delay-500 duration-300 ease-in   `}
     >
       <div className=" h-15 flex justify-center items-center w-full py-5  ">
         <div className="flex items-center gap-2 p-1">

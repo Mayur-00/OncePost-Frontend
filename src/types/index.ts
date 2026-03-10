@@ -12,9 +12,8 @@ export interface post {
   mediaURl?: string;
   status: string;
   owner_id: string;
-  scheduled_for?:string;
-  scheduledAt?:string;
-
+  scheduled_for?: string;
+  scheduledAt?: string;
 }
 
 export interface UserState {
@@ -23,6 +22,7 @@ export interface UserState {
   email: string;
   profile_Picture: string;
   createdAt: string;
+  isOnboarded: boolean;
 }
 
 export interface ConnectedAccount {
@@ -37,18 +37,19 @@ export interface ConnectedAccount {
 export interface UserStore {
   user: UserState | null;
   connectedAccounts: ConnectedAccount[] | null;
+  subscriptions: Subscription[] | null;
   loading: boolean;
-  isFetching:boolean;
+  isFetching: boolean;
   profilePictureUpdating: boolean;
   profileNameUpdating: boolean;
-  profilePicture:string;
+  profilePicture: string;
 
   getUser: () => void;
-   updateProfilePicture :  (imageLink:string) =>void
-  updateProfileName :  (name:string) =>void
-  deleteAccount :  () =>Promise<{ success: boolean; message: string }>;
-  uploadImage :  (file:File) => Promise<string | null>
-
+  updateProfilePicture: (imageLink: string) => void;
+  updateProfileName: (name: string) => void;
+  deleteAccount: () => Promise<{ success: boolean; message: string }>;
+  uploadImage: (file: File) => Promise<string | null>;
+  handleOnboarding: () => Promise<{ success: boolean; message: string }>;
 }
 
 export interface ApiResponse {
@@ -56,6 +57,29 @@ export interface ApiResponse {
   data: any;
   message: string;
   success: boolean;
+}
+
+export interface SubscriptionObj {
+  end_date: Date;
+  start_date: Date;
+  post_creation_remaining: number;
+  status: string;
+  plan: {
+    plan_tier: string;
+    maxPostsPerMonth: number;
+    price: number;
+  };
+}
+export interface Subscription {
+  end_date: string;
+  start_date: string;
+  post_creation_remaining: number;
+  status: string;
+  plan: {
+    plan_tier: string;
+    maxPostsPerMonth: number;
+    price: number;
+  };
 }
 
 export interface UserObj {
@@ -67,24 +91,28 @@ export interface UserObj {
   provider: string;
   profile_picture: string;
   refresh_token: string;
+  isOnboarded: boolean;
   createdAt: Date;
   updatedAt: Date;
   connected_accounts: ConnectedAccount[];
+  subscriptions: SubscriptionObj[];
   _count: {
     platform_post: number;
     connected_accounts: number;
     posts: number;
   };
 }
-export type UpdateResponse ={
-  name?:string;
-  profile_picture?:string;
+
+
+export type UpdateResponse = {
+  name?: string;
+  profile_picture?: string;
 };
 
 export interface PostStore {
   posts: PostsObj[] | null;
   recentsPost: PostsObj[] | null;
-  scheduledPosts:PostsObj[] | null;
+  scheduledPosts: PostsObj[] | null;
   selectedPost: {} | null;
   postsLoading: boolean;
   isSubmiting: boolean;
@@ -110,13 +138,12 @@ export interface PostsObj {
   mediaUrl: string | null;
   mediaType: string | null;
   status: string;
-  scheduled_for?:string[];
-  scheduledAt?:string;
-  postedAt?:string;
+  scheduled_for?: string[];
+  scheduledAt?: string;
+  postedAt?: string;
   createdAt: Date;
   updatedAt: Date;
   platform_post: PlatformPostsObj[];
-
 }
 
 export interface PlatformPostsObj {

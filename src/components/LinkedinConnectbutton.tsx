@@ -1,8 +1,7 @@
 "use client"
 
 import api from "@/lib/axios";
-import axios from "axios";
-import { Loader, Loader2 } from "lucide-react";
+import {  Loader2 } from "lucide-react";
 import { useState } from "react";
 const LinkedinConnectbutton = () => {
 

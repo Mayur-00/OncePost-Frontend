@@ -22,15 +22,12 @@ export const usePostStore = create<PostStore>((set) => ({
       set({ posts: newPosts });
       console.log(newPosts);
 
-
       set({ recentsPost: newPosts });
-        set({
-          scheduledPosts: newPosts.filter(function (post: PostsObj) {
-            return post.status === "SCHEDULED"
-          }),
-        });
-
-      
+      set({
+        scheduledPosts: newPosts.filter(function (post: PostsObj) {
+          return post.status === "SCHEDULED";
+        }),
+      });
 
       return {
         success: true,
@@ -93,6 +90,19 @@ export const usePostStore = create<PostStore>((set) => ({
       set({ isSubmiting: true });
 
       const res = await api.post(`/post/publish-post`, data);
+
+      if (!res.data.success) {
+        if (res.data.error_code === "USAGE_EXCEEDED") {
+          return {
+            success: false,
+            message: "Usage Limit Exceeded Please Upgrade Your Plan",
+          };
+        }
+        return {
+          success: false,
+          message: res.data.message,
+        };
+      }
 
       return {
         success: true,

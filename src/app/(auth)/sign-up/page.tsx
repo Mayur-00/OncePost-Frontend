@@ -9,9 +9,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const page = () => {
   const {registerUser, loading} = useAuthStore()
+
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -33,12 +37,12 @@ const page = () => {
     };
     toast.success('registration successfull, redirecting pls wait');
     form.reset();
-    window.location.href = '/dashboard'
+    router.replace('/dashboard')
   }
 
   return (
-    <main className="h-screen w-screen flex flex-col items-center justify-center  bg-black text-black ">
-      <h1 className="text-4xl font-bold text-zinc-100 mt-5">ONCEPOST</h1>
+    <main className="h-screen w-screen flex flex-col items-center justify-center  bg-zinc-100 text-black ">
+      <h1 className="text-4xl font-bold text-black mt-5">ONCEPOST</h1>
       <section className="min-h-[50%] w-[90%] md:h-[80%] md:w-[30%] lg:h-[85%] lg:w-[30%] flex flex-col items-center py-10 my-auto bg-white rounded-md shadow-2xl">
         <h1 className=" text-2xl md:text-2xl">Register With Us</h1>
         <form className="mx-auto min-h-[60%] max-h-[80%] w-[80%] flex flex-col gap-2  overflow-y-auto" onSubmit={form.handleSubmit(submit)}>
@@ -85,7 +89,7 @@ const page = () => {
               {form.formState.errors.password.message}
             </p>
           )}
-          <p className="text-xs text-zinc-400">By clicking on the submit button you are agreeing our terms & condition</p>
+          <p className="text-xs text-zinc-400">By clicking on the submit button you are agreeing our <Link href={"/terms"} className="underline text-blue-700">terms & condition</Link></p>
 
           <button type="submit" className="py-1 px-4 bg-violet-500 rounded-md text-white hover:bg-violet-600 cursor-pointer flex items-center justify-center " disabled={loading} >
             {
@@ -97,7 +101,7 @@ const page = () => {
             }
           </button>
         </form>
-        <p className="text-sm">Already have a account, please <a href="/sign-in" className="text-blue-600 font-bold hover:text-un">Login</a></p>
+        <p className="text-xs mt-2">Already have a account, please <Link href="/sign-in" className="underline text-blue-700">Login</Link></p>
         <div className="flex w-full items-center gap-3 px-10">
             <p className="w-[50%] h-px bg-black/30"></p>
             <p className="text-black/30">OR</p>

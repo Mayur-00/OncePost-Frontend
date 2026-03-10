@@ -18,6 +18,7 @@ const RecentsSection = () => {
 
       <section className='w-full lg:w-[60%]  h-120 overflow-y-auto flex flex-col bg-white text-black p-5 rounded-md gap-3 outline outline-zinc-300 shadow-xl'>
         <div className='text-xl lg:text-2xl font-bold'><h1>Recents</h1></div>
+        
        {
         recentsPost?.map((post)=>(
              <div key={post.id} className='w-100 lg:w-full h-50 lg:h-20 bg-white wrap-break-word whitespace-pre-wrap  leading-relaxed  shadow-lg  rounded-md p-2 flex  gap-2 relative cursor-pointer transition delay-100 duration-100 ease-in-out hover:-translate-y- hover:scale-101'>

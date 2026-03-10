@@ -2,8 +2,9 @@ import React from 'react'
 
 const AnalyticsSkeleton = () => {
   return (
-     <section className="w-full min-h-40 grid grid-cols-1 md:grid-cols-3 gap-8 my-10 text-zinc-900">
+     <section className="w-full h-full lg:min-h-40 grid grid-cols-1  md:grid-cols-3 gap-8 my-5 lg:my-10 text-zinc-900">
       
+
       {/* Card 1 */}
       <div className="group bg-white p-6 rounded-lg  outline outline-zinc-300    shadow-lg 
                       transition: delay-100 animate-out duration-100 ">

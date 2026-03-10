@@ -7,6 +7,7 @@ import { create } from "zustand";
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
   connectedAccounts: null,
+  subscriptions:null,
   loading: false,
   isFetching:false,
   profilePictureUpdating: false,
@@ -34,6 +35,7 @@ export const useUserStore = create<UserStore>((set) => ({
           email: usersdata.email,
           profile_Picture: usersdata.profile_picture,
           createdAt: usersdata.createdAt.toString().split("T")[0],
+          isOnboarded:usersdata.isOnboarded
         },
         connectedAccounts: usersdata.connected_accounts.map((acc) => ({
           id: acc.id,
@@ -43,6 +45,15 @@ export const useUserStore = create<UserStore>((set) => ({
           isActive: acc.isActive,
           isExpired: acc.isExpired,
         })),
+        subscriptions: usersdata.subscriptions.map((sub) => (
+          {
+            end_date:sub.end_date.toString().split("T")[0],
+            start_date:sub.start_date.toString().split("T")[0],
+            post_creation_remaining:sub.post_creation_remaining,
+            status:sub.status,
+            plan:sub.plan
+          }
+        ))
       });
 
       toast.success("User fetched successfully");
@@ -53,7 +64,6 @@ export const useUserStore = create<UserStore>((set) => ({
       set({ isFetching: false });
     }
   },
-
   updateProfilePicture: async (imageLink: string) => {
     try {
       set({ profilePictureUpdating: true });
@@ -79,7 +89,6 @@ export const useUserStore = create<UserStore>((set) => ({
       set({ profilePictureUpdating: false });
     }
   },
-
   updateProfileName: async (name: string) => {
     try {
       set({ profileNameUpdating: true });
@@ -132,7 +141,6 @@ export const useUserStore = create<UserStore>((set) => ({
         }
     }
   },
-
   uploadImage: async (file) => {
     const CLOUDINARY_CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
     const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUD_PRESET;
@@ -156,6 +164,33 @@ export const useUserStore = create<UserStore>((set) => ({
       return null;
     } finally {
       set({ profilePictureUpdating: false });
+    }
+  },
+  handleOnboarding :async () => {
+     try {
+
+      const res = await api.get("/auth/onboarding");
+
+      if (!res.data.success) {
+        return {
+          success:false,
+          message:'onboarding toggle failed'
+        }
+      }
+        toast.success("onboarded success");
+
+      return {
+        success:true,
+        message:'onboarding toggled successfully'
+      }
+    } catch (error) {
+      toast.success("onboarding failed");
+      console.log(error);
+   
+      return {
+          success:false,
+          message:'onboarding toggled failed'
+        }
     }
   },
 }));
