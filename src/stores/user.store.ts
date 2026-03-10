@@ -22,7 +22,7 @@ export const useUserStore = create<UserStore>((set) => ({
       const data = res.data;
 
       if (!data.success) {
-        toast.error("Failed To Get User");
+        console.log("Failed to Get User Info")
         return;
       }
 
@@ -56,10 +56,9 @@ export const useUserStore = create<UserStore>((set) => ({
         ))
       });
 
-      toast.success("User fetched successfully");
     } catch (error) {
-      console.log(error);
-      toast.error("Api call failed");
+      console.log("An Error occured while getting user");
+      toast.error("Failed To Get User");
     } finally {
       set({ isFetching: false });
     }
@@ -81,9 +80,9 @@ export const useUserStore = create<UserStore>((set) => ({
         user: state.user ? { ...state.user, profile_Picture: data.profile_picture } : null,
       }));
 
-      toast.success("Profile picture updated");
+      toast.success("Profile picture updated Successfully");
     } catch (error) {
-      console.log(error);
+      console.log("An Error Occured While Updating User Profile Picture");
       toast.error("Failed to update profile picture");
     } finally {
       set({ profilePictureUpdating: false });
@@ -110,7 +109,7 @@ export const useUserStore = create<UserStore>((set) => ({
 
       toast.success("Profile name updated");
     } catch (error) {
-      console.log(error);
+      console.log("An Error Occured While Updating User Profile Name");
       toast.error("Failed to update profile name");
     } finally {
       set({ profileNameUpdating: false });
@@ -133,7 +132,7 @@ export const useUserStore = create<UserStore>((set) => ({
         message:'account deleted successfully'
       }
     } catch (error) {
-      console.log(error);
+      console.log("An Error Occured While Deleting User Info");
    
       return {
           success:false,
@@ -160,6 +159,8 @@ export const useUserStore = create<UserStore>((set) => ({
       set({ profilePicture: res.data.secure_url });
       return res.data.secure_url;
     } catch {
+      console.log("An Error Occured While Uploading Image");
+      
       toast.error("Image upload failed");
       return null;
     } finally {
@@ -185,7 +186,8 @@ export const useUserStore = create<UserStore>((set) => ({
       }
     } catch (error) {
       toast.success("onboarding failed");
-      console.log(error);
+     console.log("An Error Occured While Onboarding User");
+     
    
       return {
           success:false,

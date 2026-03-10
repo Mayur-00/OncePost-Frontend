@@ -20,7 +20,7 @@ export const usePostStore = create<PostStore>((set) => ({
       const newPosts = res.data.data;
 
       set({ posts: newPosts });
-      console.log(newPosts);
+      console.log("posts retrieved");
 
       set({ recentsPost: newPosts });
       set({
@@ -34,7 +34,7 @@ export const usePostStore = create<PostStore>((set) => ({
         message: res.data.message,
       };
     } catch (error) {
-      console.log("error in the getPosts function", error);
+      console.log("An Error Occured While Getting Post");
       return {
         success: true,
         message: error,
@@ -59,7 +59,7 @@ export const usePostStore = create<PostStore>((set) => ({
       const newPosts = res.data.data;
 
       set({ posts: newPosts });
-      console.log(newPosts);
+      console.log("Search Query Success");
 
       if (postMessage.length > 1) {
         set({
@@ -76,7 +76,7 @@ export const usePostStore = create<PostStore>((set) => ({
         message: res.data.message,
       };
     } catch (error) {
-      console.log("error in the getPosts function", error);
+      console.log("An Error Occured While Searching Post");
       return {
         success: true,
         message: error,
@@ -110,7 +110,7 @@ export const usePostStore = create<PostStore>((set) => ({
           "Post Created Successfully it can take few minutes to publish ",
       };
     } catch (error) {
-      console.log("api call failed for post creation :", error);
+      console.log("An Error Occured While Creating Post");
 
       return {
         success: false,
