@@ -13,7 +13,7 @@ export default async function middleware(request: NextRequest) {
     path === "/" ||
     path === "/error";
 
-const isFree = path === "/privacy-policy" || path === "/help" || path === "/terms" || path ==="/pricing" || path==="/integrations" || path==="/features"
+const isFree = path === "/privacy-policy" || path === "/help" || path === "/terms" || path ==="/pricing" || path==="/integrations" || path==="/features" ||path==="/error"
 
   if (
     path.startsWith("/_next/") ||
