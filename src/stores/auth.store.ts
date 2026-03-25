@@ -3,6 +3,7 @@
 import api from "@/lib/axios";
 import { loginUserData, registerUserData } from "@/schema/auth.schema";
 import { ApiResponse } from "@/types";
+import { AxiosError } from "axios";
 import { create } from "zustand";
 
 type AuthState = {
@@ -16,6 +17,7 @@ type AuthState = {
 type response = {
   success: boolean;
   message: string;
+  code?:string;
 };
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -62,17 +64,19 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       set({ loading: true });
 
-      const result = await api.post("/auth/login", data);
+      await api.post("/auth/login", data);
 
-      if (!result.data.success) {
-        console.log("login failed", result.data);
-        return { success: false, message: "sign in failed" };
-      }
       console.log("api call success, login user");
 
       return { success: true, message: "sign in success" };
     } catch (error) {
-      console.log("api call success, login user");
+      console.log("api call failed : ", error);
+
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data.message);
+        return { success: false, message: error.response?.data.message, code:error.response?.data.error_code};
+      }
+
       return { success: false, message: "sign in failed" };
     } finally {
       set({ loading: false });

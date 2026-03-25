@@ -4,7 +4,7 @@ export const registerSchema = z.object({
   name: z
     .string()
     .min(3)
-    .max(8)
+    .max(8, "Username should be less that 8 characters")
     .regex(
       /^[a-zA-Z0-9_]+$/,
       "UserName must not contain any special Charactors"
