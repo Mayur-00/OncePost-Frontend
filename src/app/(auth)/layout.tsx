@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/sonner";
 import { GoogleProvider } from "@/providers/GoogleProvider";
 
 export default async function authLayout({
@@ -7,9 +6,8 @@ export default async function authLayout({
   children: React.ReactNode;
 }) {
   return (
-    <GoogleProvider>
-      {children}
-      <Toaster position="bottom-right" />
-    </GoogleProvider>
+   
+      <GoogleProvider>{children}</GoogleProvider>
+   
   );
 }

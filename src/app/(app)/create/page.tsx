@@ -158,7 +158,7 @@ export default function CreatePostPage() {
         />
       )}
 
-      <div className="w-5xl mx-auto p-6 grid lg:grid-cols-3 gap-6">
+      <div className="max-w-6xl mx-auto p-6 grid lg:grid-cols-3 gap-6">
         {/* LEFT SIDE */}
 
         <div className="lg:col-span-2 bg-white rounded-xl shadow p-6 space-y-6">

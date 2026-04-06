@@ -41,7 +41,7 @@ const OnboardingPage = () => {
     }
     
     toast.success("You're all set 🎉");
-    router.push("/dashboard");
+    router.replace("/dashboard");
 
     setLoading(false);
     return;
