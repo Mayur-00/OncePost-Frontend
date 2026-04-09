@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Ellipsis } from 'lucide-react'
+import Link from 'next/link'
 
 const ProfileDropdown = () => {
   return (
@@ -17,7 +18,7 @@ const ProfileDropdown = () => {
   <DropdownMenuContent className='bg-white'>
     <DropdownMenuLabel>My Account</DropdownMenuLabel>
     <DropdownMenuSeparator />
-    <DropdownMenuItem><a href="/profile">Profile</a></DropdownMenuItem>
+    <DropdownMenuItem><Link href="/settings">Profile</Link></DropdownMenuItem>
     <DropdownMenuItem variant='destructive'>Logout</DropdownMenuItem>
 
   </DropdownMenuContent>

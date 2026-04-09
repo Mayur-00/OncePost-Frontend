@@ -6,7 +6,7 @@ import SidebarUserBarSkeleton from '../skeleton/SidebarUserBarSkeleton'
 import Link from 'next/link'
 
 const UserProfileBar = () => {
-    const user = useUserStore((state) => state.user); // ✅ Use selector
+    const user = useUserStore((state) => state.user); 
     const getUser = useUserStore((state) => state.getUser); 
     const isFetching = useUserStore((state) => state.isFetching); 
     const subscripton = useUserStore((state) => state.subscriptions);
