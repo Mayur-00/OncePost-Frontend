@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Album, Cog, LayoutGrid } from "lucide-react";
+import { Album, Calendar1Icon, CalendarCogIcon, CalendarHeartIcon, CalendarIcon, Cog, LayoutGrid } from "lucide-react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutGrid },
   { href: "/posts", label: "Posts", icon: Album },
+  { href: "/schedule", label: "Calender", icon: CalendarIcon },
   { href: "/settings", label: "Settings", icon: Cog },
 ];
 

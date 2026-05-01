@@ -1,3 +1,5 @@
+import { PostWithDate } from "@/lib/types";
+
 export interface post {
   platform_post: [
     {
@@ -109,10 +111,20 @@ export type UpdateResponse = {
   profile_picture?: string;
 };
 
+export interface scheduledPosts {
+    id: string;
+    content: string;
+    mediaUrl: string | '';
+    scheduledFor: string[];
+    scheduledAt: Date ;
+}
+
+
+
 export interface PostStore {
   posts: PostsObj[] | null;
   recentsPost: PostsObj[] | null;
-  scheduledPosts: PostsObj[] | null;
+  scheduledPostsMap: Record<string, PostWithDate[]>;
   selectedPost: {} | null;
   postsLoading: boolean;
   isSubmiting: boolean;
@@ -128,7 +140,13 @@ export interface PostStore {
     skip: number,
   ) => Promise<{ success: boolean; message: string }>;
   createPost: (data: any) => Promise<{ success: boolean; message: string }>;
-  // deletePost:()=>void
+  getScheduledPosts:()=> Promise<{ success: boolean; message: string }>
+};
+
+export interface GetScheduledPostResponse {
+  success:boolean,
+  data: scheduledPosts[] | [],
+  message:string
 }
 
 export interface PostsObj {

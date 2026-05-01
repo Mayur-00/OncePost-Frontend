@@ -41,7 +41,7 @@ const RecentsSection = () => {
             <div className={`h-5 w-20 ${post.status === 'UPLOADED' ? 'bg-green-700 text-green-100 ': post.status !=='SCHEDULED' ? 'bg-red-700 text-red-100':'bg-zinc-100 text-zinc-900'} flex items-center justify-center rounded-sm outline text-xs p-3 `}>{post.status}</div>
             {
               post.scheduledAt ? (
-                <span className='text-zinc-400 text-xs'>  {`${post.status ==='SCHEDULED'? "Scheduled For" : ''}  ${new Date(post.scheduledAt).toLocaleTimeString()} : ${new Date(post.scheduledAt).toLocaleDateString()}` }</span>
+                <span className='text-zinc-400 text-xs'>  {`${post.status ==='SCHEDULED'? "Scheduled For" : ''}  ${new Date(post.scheduledAt).toLocaleTimeString('en-us', {hour:'numeric', minute:'2-digit', hour12:true})} : ${new Date(post.scheduledAt).toLocaleDateString()}` }</span>
               ) : (
                 <span className='text-zinc-400 text-xs'>{` ${new Date(post.updatedAt).toLocaleTimeString()} : ${new Date(post.updatedAt).toLocaleDateString()}`}</span>
               )

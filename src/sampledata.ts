@@ -1,0 +1,24 @@
+import { ScheduledPost } from "./lib/types";
+
+
+export const scheduledPosts: ScheduledPost[] = [
+  { id: 1,  scheduledAt: new Date("2026-04-20T09:00:00.000Z"), content: "Coffee with the team ☕ — kicking off the week with good vibes!", imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400", scheduledFor:['LINKEDIN'] },
+  { id: 2,  scheduledAt: new Date("2026-04-20T12:30:00.000Z" ), content: "Marketing strategy sync — aligning on Q2 goals and OKRs.", imageUrl: "", scheduledFor:['LINKEDIN', 'X'] },
+  { id: 3,  scheduledAt: new Date("2026-04-23T03:30:00.000Z" ), content: "All-hands meeting: company-wide updates and Q2 kickoff.", imageUrl: "https://images.unsplash.com/photo-1552581234-26160f608093?w=400", scheduledFor:['LINKEDIN'] },
+  { id: 4,  scheduledAt: new Date("2026-04-24T16:00:00.000Z" ), content: "Dinner with investors 🍽️ — presenting the new product roadmap.", imageUrl: "", scheduledFor:['LINKEDIN', 'X'] },
+  { id: 5,  scheduledAt: new Date("2026-04-27T06:30:00.000Z" ), content: "Monday standup — weekly goals and blockers review.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 6,  scheduledAt: new Date("2026-04-27T08:30:00.000Z" ), content: "Content calendar planning for May — editorial review session.", imageUrl: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400", scheduledFor:['X'] },
+  { id: 7,  scheduledAt: new Date("2026-04-28T08:00:00.000Z" ), content: "Product demo day 🚀 — live walkthrough of the new dashboard feature.", imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400", scheduledFor:['LINKEDIN'] },
+  { id: 8,  scheduledAt: new Date("2026-04-28T12:00:00.000Z" ), content: "Catch-up with the design team — feedback on latest prototypes.", imageUrl: "", scheduledFor:['LINKEDIN', 'X'] },
+  { id: 9,  scheduledAt: new Date("2026-04-29T06:30:00.000Z" ), content: "Deep work block 🧠 — focused time for architecture planning.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 10, scheduledAt: new Date("2026-04-29T07:30:00.000Z" ), content: "One-on-one with Sarah — career development and project retrospective.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 11, scheduledAt: new Date("2026-04-29T08:00:00.000Z" ), content: "Design system review — evaluating component library updates.", imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400", scheduledFor:['X'] },
+  { id: 12, scheduledAt: new Date("2026-04-29T10:00:00.000Z" ), content: "API integration sprint planning — scoping backend work for next release.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 13, scheduledAt: new Date("2026-04-29T13:30:00.000Z" ), content: "Team lunch 🥗 — celebrating April milestones!", imageUrl: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400", scheduledFor:['LINKEDIN'] },
+  { id: 14, scheduledAt: new Date("2026-04-30T09:31:00.000Z" ), content: "hi", imageUrl: "", scheduledFor:['X'] },
+  { id: 15, scheduledAt: new Date("2026-04-30T14:00:00.000Z" ), content: "Lunch with the product squad 🍕 — celebrating the launch!", imageUrl: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400", scheduledFor:['LINKEDIN'] },
+  { id: 16, scheduledAt: new Date("2026-05-01T06:30:00.000Z" ), content: "Friday standup — wrapping up sprint and planning next steps.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 17, scheduledAt: new Date("2026-05-01T07:30:00.000Z" ), content: "Olivia x Ri — collab session for the upcoming brand campaign.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 18, scheduledAt: new Date("2026-05-01T11:00:00.000Z" ), content: "Product design review — final sign-off before dev handoff.", imageUrl: "", scheduledFor:['LINKEDIN'] },
+  { id: 19, scheduledAt: new Date("2026-05-02T08:30:00.000Z" ), content: "House in... — real estate walkthrough and inspection notes.", imageUrl: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400", scheduledFor:['X'] },
+];

@@ -1,12 +1,13 @@
 import api from "@/lib/axios";
-import { PostsObj, PostStore } from "@/types";
+import { postsByDate } from "@/lib/utils";
+import { GetScheduledPostResponse, PostsObj, PostStore } from "@/types";
 import { queryObjects } from "v8";
 import { create } from "zustand";
 
 export const usePostStore = create<PostStore>((set) => ({
   posts: null,
   recentsPost: null,
-  scheduledPosts: null,
+  scheduledPostsMap:{},
   selectedPost: null,
   postsLoading: false,
   isSubmiting: false,
@@ -23,12 +24,6 @@ export const usePostStore = create<PostStore>((set) => ({
       console.log("posts retrieved");
 
       set({ recentsPost: newPosts });
-      set({
-        scheduledPosts: newPosts.filter(function (post: PostsObj) {
-          return post.status === "SCHEDULED";
-        }),
-      });
-
       return {
         success: true,
         message: res.data.message,
@@ -118,6 +113,35 @@ export const usePostStore = create<PostStore>((set) => ({
       };
     } finally {
       set({ isSubmiting: false });
+    }
+  },
+  getScheduledPosts: async () => {
+    try {
+      set({ postsLoading: true });
+
+      const res = await api.get<GetScheduledPostResponse>(`/post/schedule`);
+
+      if (!res.data.success) {
+        return {
+          success: false,
+          message: res.data.message,
+        };
+      }
+    const newmap = postsByDate(res.data.data)
+
+      set({ scheduledPostsMap: newmap});
+
+      return {
+        success: true,
+        message: res.data.message,
+      };
+    } catch (error) {
+      console.log("An Error Occured While fetching scheduled posts");
+
+      return {
+        success: false,
+        message: "scheduled post fetch failed",
+      };
     }
   },
 }));
