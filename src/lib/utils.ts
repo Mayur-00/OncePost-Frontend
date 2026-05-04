@@ -1,14 +1,12 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { PostWithDate, ScheduledPost } from "./types";
+import { PostWithDate, } from "./types";
 import { scheduledPosts } from "@/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-export function isoToLocal(iso: Date): Date {
-  return new Date(iso);
-}
+
  
 /** ISO week number */
 export function getWeekNumber(d: Date): number {
@@ -22,10 +20,11 @@ export function getWeekNumber(d: Date): number {
  export const postsByDate = (posts:scheduledPosts[]) => {
     const map: Record<string, PostWithDate[]> = {};
     posts.forEach((p) => {
-      const d = isoToLocal(p.scheduledAt);
+      const d = new Date(p.scheduledAt)
       const key = `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
       if (!map[key]) map[key] = [];
       map[key].push({ ...p, _date: d });
     });
     return map;
-  }
+  };
+

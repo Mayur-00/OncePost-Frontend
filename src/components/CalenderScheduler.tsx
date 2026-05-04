@@ -13,11 +13,12 @@ import {
 
 import { PostDetailPanel } from "./PostDetailPanel";
 
-import { ScheduledPost, PostWithDate } from "@/lib/types";
-import { isoToLocal, getWeekNumber } from "@/lib/utils";
+import { PostWithDate } from "@/lib/types";
+import { getWeekNumber } from "@/lib/utils";
 import { SchedulerCalendar } from "./SchedulerCalender";
 import { usePostStore } from "@/stores/post.store";
 import { scheduledPosts } from "@/sampledata";
+import { useSchedulerStore } from "@/stores/scheduler/scheduler.store";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const MONTH_NAMES = [
@@ -38,7 +39,7 @@ export function CalendarScheduler() {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [selectedPost, setSelectedPost] = useState<PostWithDate | null>(null);
   const [month, setMonth] = useState<Date>(new Date(today.getFullYear(), today.getMonth(), 1));
-  const {getScheduledPosts} = usePostStore()
+  const {getScheduledPosts} = useSchedulerStore()
 
   function goToPrev() {
     const newDate = new Date(currentYear, currentMonth - 1, 1);
@@ -64,6 +65,7 @@ export function CalendarScheduler() {
   const firstOfMonth = new Date(currentYear, currentMonth, 1);
 
   useEffect(() => {
+    console.log("fetching scheduled posts")
     getScheduledPosts();
 }, [])
 

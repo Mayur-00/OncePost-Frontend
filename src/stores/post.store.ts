@@ -136,7 +136,7 @@ export const usePostStore = create<PostStore>((set) => ({
         message: res.data.message,
       };
     } catch (error) {
-      console.log("An Error Occured While fetching scheduled posts");
+      console.log("An Error Occured While fetching scheduled posts", error);
 
       return {
         success: false,

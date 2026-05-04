@@ -115,7 +115,7 @@ export interface scheduledPosts {
     id: string;
     content: string;
     mediaUrl: string | '';
-    scheduledFor: string[];
+    scheduled_for: string[];
     scheduledAt: Date ;
 }
 

@@ -1,7 +1,5 @@
-import { ScheduledPost } from "./lib/types";
 
-
-export const scheduledPosts: ScheduledPost[] = [
+export const scheduledPosts = [
   { id: 1,  scheduledAt: new Date("2026-04-20T09:00:00.000Z"), content: "Coffee with the team ☕ — kicking off the week with good vibes!", imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400", scheduledFor:['LINKEDIN'] },
   { id: 2,  scheduledAt: new Date("2026-04-20T12:30:00.000Z" ), content: "Marketing strategy sync — aligning on Q2 goals and OKRs.", imageUrl: "", scheduledFor:['LINKEDIN', 'X'] },
   { id: 3,  scheduledAt: new Date("2026-04-23T03:30:00.000Z" ), content: "All-hands meeting: company-wide updates and Q2 kickoff.", imageUrl: "https://images.unsplash.com/photo-1552581234-26160f608093?w=400", scheduledFor:['LINKEDIN'] },

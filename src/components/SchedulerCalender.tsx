@@ -1,11 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { PostWithDate } from "@/lib/types";
 import { PostPill } from "./PostPill";
 import { Plus } from "lucide-react";
 import { usePostStore } from "@/stores/post.store";
+import { CreateScheduleDialog } from "./SchedulePostDialog";
+import { useSchedulerStore } from "@/stores/scheduler/scheduler.store";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface SchedulerCalendarProps {
@@ -25,7 +27,7 @@ export function SchedulerCalendar({
 }: SchedulerCalendarProps) {
   const currentYear = month.getFullYear();
   const currentMonth = month.getMonth();
-  const scheduledPostsMap = usePostStore((state)=>state.scheduledPostsMap);
+  const scheduledPostsMap = useSchedulerStore((state)=>state.scheduledPostsMap);
 
 
   const cells = useMemo(() => {
@@ -44,6 +46,10 @@ export function SchedulerCalendar({
       return { cellDate, isOtherMonth, isToday, posts, key };
     });
   }, [currentYear, currentMonth, scheduledPostsMap, today]);
+
+  useEffect(() => {
+  console.log("Map updated:", scheduledPostsMap);
+}, [scheduledPostsMap]);
 
   return (
     <div className="overflow-auto">
@@ -111,8 +117,10 @@ export function SchedulerCalendar({
                   "opacity-0 scale-95 transition-all duration-200", 
                   "group-hover:opacity-100 group-hover:scale-100",
                 )}
+                
               >
-                <Plus size={16} strokeWidth={3} />
+                <CreateScheduleDialog initialDate={cellDate} />
+                
               </button>
             </div>
           );
