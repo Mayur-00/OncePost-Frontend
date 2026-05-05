@@ -2,13 +2,16 @@
 'use client'
 import { usePostStore } from "@/stores/post.store";
 import { useUserStore } from "@/stores/user.store";
-import React, { useEffect } from "react";
+import React from "react";
 import AnalyticsSkeleton from "../skeleton/AnalyticsSkeleton";
+import { useSchedulerStore } from "@/stores/scheduler/scheduler.store";
 
 
 const AnalyticsSection = () => {
-   const { posts, postsLoading, scheduledPosts} = usePostStore();
-   const {connectedAccounts, getUser, user} = useUserStore();
+   const posts = usePostStore((state) => state.posts)
+   const postsLoading = usePostStore((state) => state.postsLoading)
+   const connectedAccounts = useUserStore((state) => state.connectedAccounts);
+   const scheduledPostsMap = useSchedulerStore((state)=>state.scheduledPostsMap)
 
    if (postsLoading){ return(<AnalyticsSkeleton/>) }else {
     return (
@@ -36,7 +39,7 @@ const AnalyticsSection = () => {
 
         <div className="flex flex-col items-center">
           <h1 className="text-5xl font-bold tracking-tight group-hover:text-zinc-800">
-            {scheduledPosts?.length || '0'}
+            {Object.keys(scheduledPostsMap || {}).length || '0'}
           </h1>
           <p className="mt-1 text-sm text-zinc-600">
             Scheduled Posts
@@ -51,7 +54,7 @@ const AnalyticsSection = () => {
 
         <div className="flex flex-col items-center">
           <h1 className="text-5xl font-bold tracking-tight group-hover:text-zinc-800">
-            {connectedAccounts?.length}
+            {connectedAccounts?.length || '0'}
           </h1>
           <p className="mt-1 text-sm text-zinc-600">
             Connected Accounts

@@ -3,10 +3,13 @@
 import { usePostStore } from "@/stores/post.store";
 import React from "react";
 import MiniFooterSkeleton from "../skeleton/MiniFooterSkeleton";
+import { useSchedulerStore } from "@/stores/scheduler/scheduler.store";
 
 const MiniFooter = () => {
 
-  const {postsLoading, scheduledPosts, posts} = usePostStore();
+   const posts = usePostStore((state) => state.posts)
+     const postsLoading = usePostStore((state) => state.postsLoading)
+     const scheduledPostsMap = useSchedulerStore((state)=>state.scheduledPostsMap)
 
   if(postsLoading) {
     return <MiniFooterSkeleton/>
@@ -30,7 +33,7 @@ const MiniFooter = () => {
 
         <div className="flex justify-between items-center">
           <span className="text-gray-600  transition delay-75 animate-in duration-75 hover:scale-101 hover:text-zinc-900 hover:font-bold cursor-context-menu">Scheduled posts</span>
-          <span className="font-semibold">{scheduledPosts?.length || "0"}</span>
+          <span className="font-semibold"> {Object.keys(scheduledPostsMap || {}).length || '0'}</span>
         </div>
 
         <div className="flex justify-between items-center">

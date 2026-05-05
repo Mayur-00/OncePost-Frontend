@@ -39,7 +39,7 @@ const submit = async (data:loginUserData)=>{
   };
 
 
- router.replace('/dashboard')
+ router.replace('/boarding-gateway')
 }
 
   return (

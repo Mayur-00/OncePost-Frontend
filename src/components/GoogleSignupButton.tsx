@@ -21,7 +21,7 @@ const GoogleSignupButton = () => {
       toast.error(res.message);
       return;
     }
-    router.replace("/onboarding")
+    router.push("/boarding-gateway")
   };
 
   const handleError = () => {

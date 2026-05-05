@@ -51,7 +51,7 @@ export default function SubscriptionLimitBanner({ limit, className }: Props) {
         
         <button
           onClick={() => setVisible(false)}
-          className="p-2 text-red-400 hover:text-red-600 hover:bg-red-100 rounded-full transition-colors absolute top-0 right-0"
+          className="p-2 text-red-400 hover:text-red-600 hover:bg-red-100 rounded-full transition-colors absolute top-0  right-0"
         >
           <X size={16} />
         </button>

@@ -37,7 +37,7 @@ const page = () => {
     };
     toast.success('registration successfull, redirecting pls wait');
     form.reset();
-    router.replace('/dashboard')
+    router.replace('/boarding-gateway')
   }
 
   return (
