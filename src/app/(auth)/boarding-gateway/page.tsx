@@ -24,9 +24,6 @@ const GatewayPage = () => {
       }
     } 
     
-    if (!isFetching && user === null) {
-       router.replace("/login"); 
-    }
   }, [user, isFetching, router]);
 
   return (
