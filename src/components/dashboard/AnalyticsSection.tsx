@@ -11,6 +11,7 @@ const AnalyticsSection = () => {
    const posts = usePostStore((state) => state.posts)
    const postsLoading = usePostStore((state) => state.postsLoading)
    const connectedAccounts = useUserStore((state) => state.connectedAccounts);
+   const subscriptions = useUserStore((state) => state.subscriptions);
    const scheduledPostsMap = useSchedulerStore((state)=>state.scheduledPostsMap)
 
    if (postsLoading){ return(<AnalyticsSkeleton/>) }else {
@@ -38,11 +39,11 @@ const AnalyticsSection = () => {
         <div className="text-3xl mb-3">📆</div>
 
         <div className="flex flex-col items-center">
-          <h1 className="text-5xl font-bold tracking-tight group-hover:text-zinc-800">
-            {Object.keys(scheduledPostsMap || {}).length || '0'}
+          <h1 className="text-5xl text-violet-600 font-bold tracking-tight group-hover:text-violet-500">
+            { subscriptions ? subscriptions[0].plan.plan_tier :"null"}
           </h1>
           <p className="mt-1 text-sm text-zinc-600">
-            Scheduled Posts
+            Plan 
           </p>
         </div>
       </div>
