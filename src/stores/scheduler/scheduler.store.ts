@@ -18,6 +18,12 @@ export const useSchedulerStore = create<SchedulerStore>((set) => ({
       const res = await api.get<GetScheduledPostResponse>(`/post/schedule`);
 
       if (!res.data.success) {
+          if(res.data.error_code === "LINKEDIN_ACCOUNT_EXPIRED"){
+          return {
+          success: false,
+          message:"LINKEDIN_ACCOUNT_EXPIRED" ,
+        };
+        };
         return {
           success: false,
           message: res.data.message,

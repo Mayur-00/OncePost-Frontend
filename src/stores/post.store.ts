@@ -1,13 +1,19 @@
 import api from "@/lib/axios";
 import { postsByDate } from "@/lib/utils";
-import { GetScheduledPostResponse, PostsObj, PostStore } from "@/types";
+import {
+  ApiResponse,
+  GetScheduledPostResponse,
+  PostsObj,
+  PostStore,
+} from "@/types";
+import axios from "axios";
 import { queryObjects } from "v8";
 import { create } from "zustand";
 
 export const usePostStore = create<PostStore>((set) => ({
   posts: null,
   recentsPost: null,
-  scheduledPostsMap:{},
+  scheduledPostsMap: {},
   selectedPost: null,
   postsLoading: false,
   isSubmiting: false,
@@ -84,27 +90,27 @@ export const usePostStore = create<PostStore>((set) => ({
     try {
       set({ isSubmiting: true });
 
-      const res = await api.post(`/post/publish-post`, data);
+      const res = await api.post<GetScheduledPostResponse>(
+        `/post/publish-post`,
+        data,
+      );
 
-      if (!res.data.success) {
-        if (res.data.error_code === "USAGE_EXCEEDED") {
-          return {
-            success: false,
-            message: "Usage Limit Exceeded Please Upgrade Your Plan",
-          };
-        }
-        return {
-          success: false,
-          message: res.data.message,
-        };
-      }
-
-      return {
+      return {  
         success: true,
         message:
           "Post Created Successfully it can take few minutes to publish ",
       };
     } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          if (error.response.data.error_code === "LINKEDIN_ACCOUNT_EXPIRED") {
+            return {
+              success: false,
+              message: "LINKEDIN_ACCOUNT_EXPIRED",
+            };
+          }
+        }
+      }
       console.log("An Error Occured While Creating Post");
 
       return {
@@ -127,9 +133,9 @@ export const usePostStore = create<PostStore>((set) => ({
           message: res.data.message,
         };
       }
-    const newmap = postsByDate(res.data.data)
+      const newmap = postsByDate(res.data.data);
 
-      set({ scheduledPostsMap: newmap});
+      set({ scheduledPostsMap: newmap });
 
       return {
         success: true,

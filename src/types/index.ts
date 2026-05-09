@@ -147,6 +147,7 @@ export interface GetScheduledPostResponse {
   success:boolean,
   data: scheduledPosts[] | [],
   message:string
+  error_code?:string
 }
 
 export interface PostsObj {

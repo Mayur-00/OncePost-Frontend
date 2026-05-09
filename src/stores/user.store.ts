@@ -37,14 +37,16 @@ export const useUserStore = create<UserStore>((set) => ({
           createdAt: usersdata.createdAt.toString().split("T")[0],
           isOnboarded:usersdata.isOnboarded
         },
-        connectedAccounts: usersdata.connected_accounts.map((acc) => ({
-          id: acc.id,
-          platform: acc.platform,
-          display_name: acc.display_name,
-          profile_picture: acc.profile_picture,
-          isActive: acc.isActive,
-          isExpired: acc.isExpired,
-        })),
+        connectedAccounts: usersdata.connected_accounts
+          .filter((acc) => !acc.isExpired)
+          .map((acc) => ({
+            id: acc.id,
+            platform: acc.platform,
+            display_name: acc.display_name,
+            profile_picture: acc.profile_picture,
+            isActive: acc.isActive,
+            isExpired: acc.isExpired,
+          })),
         subscriptions: usersdata.subscriptions.map((sub) => (
           {
             end_date:sub.end_date.toString().split("T")[0],

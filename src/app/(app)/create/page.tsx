@@ -127,9 +127,19 @@ export default function CreatePostPage() {
       console.log("formdata ", formData);
 
       const response = await createPost(formData);
+      console.log(response)
 
       if (!response.success) {
-        toast.error(response.message);
+        console.log(response.message)
+        
+        if(response.message === "LINKEDIN_ACCOUNT_EXPIRED"){
+          toast.error("your Linkedin account expired, please reconnect...")
+          router.replace('/settings');
+        } else {
+          console.log(response);
+          
+          toast.error(response.message);
+        }
         return;
       }
 
@@ -139,8 +149,17 @@ export default function CreatePostPage() {
     } else {
       const response = await createPost(formData);
 
-      if (!response.success) {
-        toast.error(response.message);
+       if (!response.success) {
+        console.log(response.message)
+        
+        if(response.message === "LINKEDIN_ACCOUNT_EXPIRED"){
+          toast.error("your Linkedin account expired, please reconnect...")
+           window.location.href="/settings"
+        } else {
+          console.log(response);
+          
+          toast.error(response.message);
+        }
         return;
       }
 
