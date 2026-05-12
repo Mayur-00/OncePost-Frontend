@@ -132,13 +132,22 @@ export function CreateScheduleDialog({
       setOpen(false);
       form.reset();
     } else {
-      if (res.message === "LINKEDIN_ACCOUNT_EXPIRED") {
-        toast.error("your Linkedin account is expired, please reconnect ...");
-
-        window.location.href = "/settings";
-      } else {
-        toast.error(res.message);
-      }
+      switch (res.message) {
+          case "LINKEDIN_ACCOUNT_EXPIRED": {
+            toast.error("your Linkedin account expired, please reconnect...");
+            window.location.href = "/settings";
+            break;
+          }
+          case "X_ACCOUNT_EXPIRED": {
+            toast.error("your X account expired, please reconnect...");
+            window.location.href = "/settings";
+            break;
+          };
+          default : {
+            toast.error(res.message);
+            break;
+          }
+        }
       setOpen(false);
       form.reset();
 

@@ -106,9 +106,8 @@ export default function CreatePostPage() {
     };
 
     if (UploadedImage) {
-      formData.imageLink= UploadedImage.url;
+      formData.imageLink = UploadedImage.url;
       formData.imageMimeType = mediaType;
-
     }
 
     if (wantToSchedule) {
@@ -127,45 +126,60 @@ export default function CreatePostPage() {
       console.log("formdata ", formData);
 
       const response = await createPost(formData);
-      console.log(response)
+      console.log(response);
 
       if (!response.success) {
-        console.log(response.message)
-        
-        if(response.message === "LINKEDIN_ACCOUNT_EXPIRED"){
-          toast.error("your Linkedin account expired, please reconnect...")
-          router.replace('/settings');
-        } else {
-          console.log(response);
-          
-          toast.error(response.message);
+        console.log(response.message);
+
+        switch (response.message) {
+          case "LINKEDIN_ACCOUNT_EXPIRED": {
+            toast.error("your Linkedin account expired, please reconnect...");
+            window.location.href = "/settings";
+            break;
+          }
+          case "X_ACCOUNT_EXPIRED": {
+            toast.error("your X account expired, please reconnect...");
+            window.location.href = "/settings";
+            break;
+          }
+          default: {
+            toast.error(response.message);
+            break;
+          }
         }
-        return;
       }
 
       toast.success(response.message);
 
-      window.location.href="/dashboard"
+      window.location.href = "/dashboard";
     } else {
       const response = await createPost(formData);
 
-       if (!response.success) {
-        console.log(response.message)
-        
-        if(response.message === "LINKEDIN_ACCOUNT_EXPIRED"){
-          toast.error("your Linkedin account expired, please reconnect...")
-           window.location.href="/settings"
-        } else {
-          console.log(response);
-          
-          toast.error(response.message);
+      if (!response.success) {
+        console.log(response.message);
+
+        switch (response.message) {
+          case "LINKEDIN_ACCOUNT_EXPIRED": {
+            toast.error("your Linkedin account expired, please reconnect...");
+            window.location.href = "/settings";
+            break;
+          }
+          case "X_ACCOUNT_EXPIRED": {
+            toast.error("your X account expired, please reconnect...");
+            window.location.href = "/settings";
+            break;
+          }
+          default: {
+            toast.error(response.message);
+            break;
+          }
         }
         return;
       }
 
       toast.success(response.message);
 
-      window.location.href="/dashboard"
+      window.location.href = "/dashboard";
     }
   };
 

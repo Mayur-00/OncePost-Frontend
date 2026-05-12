@@ -3,6 +3,7 @@ import { SchedulePostApiResponseType, SchedulerStore } from "./types";
 import { postsByDate } from "@/lib/utils";
 import { GetScheduledPostResponse } from "@/types";
 import api from "@/lib/axios";
+import axios from "axios";
 
 export const useSchedulerStore = create<SchedulerStore>((set) => ({
   selectedPost: null,
@@ -18,12 +19,6 @@ export const useSchedulerStore = create<SchedulerStore>((set) => ({
       const res = await api.get<GetScheduledPostResponse>(`/post/schedule`);
 
       if (!res.data.success) {
-          if(res.data.error_code === "LINKEDIN_ACCOUNT_EXPIRED"){
-          return {
-          success: false,
-          message:"LINKEDIN_ACCOUNT_EXPIRED" ,
-        };
-        };
         return {
           success: false,
           message: res.data.message,
@@ -84,9 +79,35 @@ export const useSchedulerStore = create<SchedulerStore>((set) => ({
         message: "post created successfull",
       };
     } catch (error) {
-      return {
-        success: false,
-        message: "scheduled post fetch failed",
+     if (axios.isAxiosError(error)) {
+        if (error.response) {
+          switch (error.response.data.error_code) {
+            case "LINKEDIN_ACCOUNT_EXPIRED": {
+              return {
+                success: false,
+                message: "LINKEDIN_ACCOUNT_EXPIRED",
+              };
+            }
+            case "X_ACCOUNT_EXPIRED": {
+              return {
+                success: false,
+                message: "X_ACCOUNT_EXPIRED",
+              };
+            }
+
+            default: {
+              return {
+                success: false,
+                message: "Failed To Schedule Post",
+              };
+            }
+          }
+        }
+      } 
+
+        return {
+        success: true,
+        message: "Failed To Schedule Post"
       };
     }
   },

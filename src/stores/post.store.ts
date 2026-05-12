@@ -95,7 +95,7 @@ export const usePostStore = create<PostStore>((set) => ({
         data,
       );
 
-      return {  
+      return {
         success: true,
         message:
           "Post Created Successfully it can take few minutes to publish ",
@@ -103,16 +103,29 @@ export const usePostStore = create<PostStore>((set) => ({
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
-          if (error.response.data.error_code === "LINKEDIN_ACCOUNT_EXPIRED") {
-            return {
-              success: false,
-              message: "LINKEDIN_ACCOUNT_EXPIRED",
-            };
+          switch (error.response.data.error_code) {
+            case "LINKEDIN_ACCOUNT_EXPIRED": {
+              return {
+                success: false,
+                message: "LINKEDIN_ACCOUNT_EXPIRED",
+              };
+            }
+            case "X_ACCOUNT_EXPIRED": {
+              return {
+                success: false,
+                message: "X_ACCOUNT_EXPIRED",
+              };
+            }
+
+            default: {
+              return {
+                success: false,
+                message: error.response.data.message,
+              };
+            }
           }
         }
-      }
-      console.log("An Error Occured While Creating Post");
-
+      } 
       return {
         success: false,
         message: "Post Creation Failed",
