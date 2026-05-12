@@ -81,6 +81,7 @@ export const useSchedulerStore = create<SchedulerStore>((set) => ({
     } catch (error) {
      if (axios.isAxiosError(error)) {
         if (error.response) {
+          console.log(error.response.data.error_code);
           switch (error.response.data.error_code) {
             case "LINKEDIN_ACCOUNT_EXPIRED": {
               return {
@@ -106,7 +107,7 @@ export const useSchedulerStore = create<SchedulerStore>((set) => ({
       } 
 
         return {
-        success: true,
+        success: false,
         message: "Failed To Schedule Post"
       };
     }

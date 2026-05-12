@@ -132,6 +132,7 @@ export function CreateScheduleDialog({
       setOpen(false);
       form.reset();
     } else {
+      console.log(res)
       switch (res.message) {
           case "LINKEDIN_ACCOUNT_EXPIRED": {
             toast.error("your Linkedin account expired, please reconnect...");
