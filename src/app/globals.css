@@ -2,24 +2,29 @@
 @import "tw-animate-css";
 
 @layer utilities {
+
   /* Custom Scrollbar for the Scheduler Dialog */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 5px; /* Very thin width */
+    width: 5px;
+    /* Very thin width */
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent; /* Clean look */
+    background: transparent;
+    /* Clean look */
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #e2e8f0; /* stone-200 */
+    background: #e2e8f0;
+    /* stone-200 */
     border-radius: 10px;
     transition: all 0.2s ease;
   }
 
   /* Only show the violet color on hover for a premium feel */
   .custom-scrollbar:hover::-webkit-scrollbar-thumb {
-    background: #7c3aed; /* violet-600 */
+    background: #7c3aed;
+    /* violet-600 */
   }
 
   /* Handle for Firefox */
@@ -27,4 +32,29 @@
     scrollbar-width: thin;
     scrollbar-color: #e2e8f0 transparent;
   }
+
+  .note-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-paper {
+  border: 2px solid black;
+  box-shadow: 3px 3px 0px black;
+  transition: all 0.1s ease;
+  color:black;
+  background-color: white;
+}
+
+.btn-paper:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0px rgb(51, 50, 50);
+  background-color: rgb(51, 50, 50);
+  color:white
+
+}
+
+.btn-paper:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px black;
+}
 }
