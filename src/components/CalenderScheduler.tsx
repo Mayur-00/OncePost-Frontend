@@ -70,12 +70,12 @@ export function CalendarScheduler() {
 }, [])
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans">
+    <div className="min-h-screen bg-stone-50">
       {/* ── Header ── */}
       <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 bg-white px-6 py-3.5 shadow-sm">
         {/* Left: date badge + title */}
         <div className="flex items-center gap-4">
-          <div className="flex min-w-[48px] flex-col items-center rounded-xl bg-violet-600 px-3 py-1.5 text-white">
+          <div className="flex min-w-12 flex-col items-center rounded-xl bg-violet-600 px-3 py-1.5 text-white">
             <span className="text-[10px] font-semibold uppercase tracking-widest">
               {MONTH_ABBR[today.getMonth()]}
             </span>

@@ -1,3 +1,4 @@
+"use client"
 import { CalendarScheduler } from "@/components/CalenderScheduler";
 
 

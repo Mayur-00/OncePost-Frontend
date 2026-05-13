@@ -191,10 +191,10 @@ export default function CreatePostPage() {
         />
       )}
 
-      <div className="max-w-6xl mx-auto p-6 grid lg:grid-cols-3 gap-6">
+      <div className="w-full mx-auto p-6 grid lg:grid-cols-3 gap-6">
         {/* LEFT SIDE */}
 
-        <div className="lg:col-span-2 bg-white rounded-xl shadow p-6 space-y-6">
+        <div className="lg:col-span-2 bg-white rounded-xl p-6 space-y-6 shadow-md border">
           {/* CONTENT */}
 
           <div>
@@ -204,7 +204,7 @@ export default function CreatePostPage() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Share something..."
-              className="w-full h-36 border rounded-lg p-4 resize-none focus:ring-2 focus:ring-violet-500"
+              className="w-full h-36 rounded-lg p-4 resize-none focus:ring-2 focus:ring-violet-500 shadow-md border"
             />
 
             <div className="text-xs text-gray-400 text-right">
@@ -231,10 +231,10 @@ export default function CreatePostPage() {
                 <input type="file" hidden onChange={handleFileSelect} />
               </label>
             ) : (
-              <div className="relative">
+              <div className="relative ">
                 <img
                   src={imagePreview}
-                  className="rounded-lg max-h-72 w-full object-cover"
+                  className="rounded-lg max-h-72 w-full object-fill shadow-md border"
                 />
 
                 <button

@@ -5,7 +5,7 @@ import React from "react";
 const PostPreview = ({content, imagePreview, platforms}:{content:string, imagePreview:string, platforms:any[]}) => {
   const {user} = useUserStore();
   return (
-    <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-4">
+    <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-4 border">
       
       {/* Header */}
       <div className="flex items-center gap-3 mb-3">

@@ -5,6 +5,7 @@ import { useUserStore } from "@/stores/user.store";
 import React from "react";
 import AnalyticsSkeleton from "../skeleton/AnalyticsSkeleton";
 import { useSchedulerStore } from "@/stores/scheduler/scheduler.store";
+import { PostWithDate } from "@/lib/types";
 
 
 const AnalyticsSection = () => {
@@ -39,11 +40,11 @@ const AnalyticsSection = () => {
         <div className="text-3xl mb-3">📆</div>
 
         <div className="flex flex-col items-center">
-          <h1 className="text-5xl text-violet-600 font-bold tracking-tight group-hover:text-violet-500">
-            { subscriptions ? subscriptions[0].plan.plan_tier :"null"}
+          <h1 className="text-5xl font-bold tracking-tight group-hover:text-zinc-800">
+            {Object.values(scheduledPostsMap).flat().length}
           </h1>
           <p className="mt-1 text-sm text-zinc-600">
-            Plan 
+            Total Scheduled Posts
           </p>
         </div>
       </div>

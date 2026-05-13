@@ -32,7 +32,6 @@ export default function HomePage() {
     <>
       <HeaderSection /> 
       <SubscriptionUsageTile />
-
       <AnalyticsSection />
       <section className="h-auto w-full flex flex-col lg:flex-row my-5  p-0 lg:p-5 rounded-md gap-5 lg:gap-0 bg-gray-50 shadow-lg  ">
         <RecentsSection />
