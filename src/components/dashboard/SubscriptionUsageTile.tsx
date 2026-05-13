@@ -18,9 +18,7 @@ const SubscriptionUsageTile = () => {
 
    if(!subscriptions ){
     return (
-       <section className="bg-white rounded-xl shadow-md p-6 flex flex-col gap-6">
-        <h1>Nothing to show</h1>
-       </section>
+     <SubscriptionUsageTileSkeleton/>
     )
   }
   const activeSub = subscriptions[0];
