@@ -3,26 +3,26 @@ import { Crown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import SubscriptionUsageTileSkeleton from "../skeleton/SubscriptionUsageTileSkeleton";
 import Link from "next/link";
+import { useSubscriptionStore } from "@/stores/subscription/subscription.store";
 
 
 const SubscriptionUsageTile = () => {
-  const router = useRouter();
 
-  const subscriptions = useUserStore((state) => state.subscriptions);
-  const isFetching = useUserStore((state) => state.subscriptions);
+  const subscription = useSubscriptionStore((state) => state.currentSubscription);
+  const isFetching = useSubscriptionStore((state) => state.isFetchingCurrentPlan);
 
-  if(isFetching && !subscriptions){
+  if(isFetching && !subscription){
 
     return <SubscriptionUsageTileSkeleton/>
   }
 
-   if(!subscriptions ){
+   if(!subscription ){
     return (
      <SubscriptionUsageTileSkeleton/>
     )
   }
-  const activeSub = subscriptions[0];
-  const plan = subscriptions[0].plan;
+  const activeSub = subscription;
+  const plan = subscription.plan;
 
   const postsUsed = plan.maxPostsPerMonth - activeSub.post_creation_remaining;
 
