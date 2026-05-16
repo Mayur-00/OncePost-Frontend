@@ -24,7 +24,7 @@ const UserProfileBar = () => {
       >
       <Link href="/settings">
         <img
-          className="h-6 w-6 rounded-sm"
+          className="h-6 w-6 rounded-sm  object-cover"
           src={user?.profile_Picture || " /user-placeholder.png"}
           alt="profile_pic"
         /></Link>
