@@ -2,9 +2,9 @@
 
 import MobileSidebar from "@/components/layouts/MobileSidebar";
 import SideBar from "@/components/layouts/SideBar";
+import { useSubscriptionStore } from "@/stores/subscription/subscription.store";
 import { useUserStore } from "@/stores/user.store";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Toaster } from "sonner";
 
 export default function DashboardLayout({
@@ -12,35 +12,36 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-
-  const getUser = useUserStore((state) => state.getUser);
+  // 1️⃣ Safe Selector Strategy: Pull actions and state cleanly
   const user = useUserStore((state) => state.user);
+  const getUser = useUserStore((state) => state.getUser);
+  const fetchCurrentUserSubscription = useSubscriptionStore((state) => state.fetchCurrentUserSubscription);
 
-  const router = useRouter();
+  // 2️⃣ Use a ref flag to prevent duplicate sync loops during the same mount lifecycle
+  const hasInitialized = useRef(false);
 
-  // 1️⃣ Fetch user if not present
   useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-  }, [user, getUser]);
+    if (hasInitialized.current) return;
+    hasInitialized.current = true;
 
-  // 2️⃣ Redirect if not onboarded
-  useEffect(() => {
-    if (user && !user.isOnboarded) {
-      console.log('user is not onboarded');
-      router.push('/onboarding');
-    }
-  }, [user, router]);
+    const syncAccountData = async () => {
+      if (!user) {
+        await getUser();
+      }
+      await fetchCurrentUserSubscription();
+    };
+
+    syncAccountData();
+  }, [getUser, fetchCurrentUserSubscription]); // Removed 'user' dependency to stop cascade triggers
 
   return (
     <main className="h-screen w-screen flex overflow-y-auto relative">
-      <SideBar/>
-      <MobileSidebar/>
+      <SideBar />
+      <MobileSidebar />
       <section className="w-full p-4 lg:p-6 mt-15 lg:m-0 flex flex-col gap-6 overflow-y-auto">
         {children}
       </section>
-      <Toaster position="bottom-right"/>
+      <Toaster position="bottom-right" />
     </main>
   );
 }
